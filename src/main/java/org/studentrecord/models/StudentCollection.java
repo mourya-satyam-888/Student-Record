@@ -30,4 +30,8 @@ public class StudentCollection implements Serializable {
   public HashSet<Student> getStudents() {
     return students;
   }
+
+  public void clearList() {
+    students.clear();
+  }
 }

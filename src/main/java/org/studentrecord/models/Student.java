@@ -1,20 +1,28 @@
 package org.studentrecord.models;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Student implements Serializable, Comparable<Student> {
+  @NotNull(message = "Empty Name")
+  @NotEmpty(message = "Empty Name")
   private final String name;
+  @Min(value = 3, message = "Invalid Age")
   private final int age;
+  @NotNull(message = "Empty Address")
   private final String address;
   private final String rollNo;
-  private final ArrayList<String> courses = new ArrayList<>();
+  private List<String> courses;
 
-  public Student(final String name, final int age, final String address, final String rollNo) {
+  public Student(final String name, final int age, final String address, final String rollNo, final List<String> courses) {
     this.name = name;
     this.age = age;
     this.address = address;
     this.rollNo = rollNo;
+    this.courses = courses;
   }
 
   @Override

@@ -3,8 +3,7 @@ package org.studentrecord.comparators;
 import java.util.Comparator;
 import org.studentrecord.models.Student;
 
-public class StudentByRollNoASC implements Comparator<Student> {
-  //will make for all combinations
+public class StudentByRollNoDESC implements Comparator<Student> {
   @Override
   public int compare(Student o1, Student o2) {
     return 0;
