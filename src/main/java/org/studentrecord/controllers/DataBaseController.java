@@ -1,5 +1,5 @@
 package org.studentrecord.controllers;
 
-public class DBController {
+public class DataBaseController {
   //read write of file
 }

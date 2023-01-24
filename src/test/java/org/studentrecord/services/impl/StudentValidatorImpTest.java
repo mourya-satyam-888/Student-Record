@@ -1,24 +1,25 @@
 package org.studentrecord.services.impl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.studentrecord.models.Student;
-import org.studentrecord.services.IStudentValidator;
+import org.studentrecord.services.StudentValidator;
 import org.studentrecord.services.impl.studentvalidationstructure.ValidateAgeTestStructure;
 import org.studentrecord.services.impl.studentvalidationstructure.ValidateCourseTestStructure;
 import org.studentrecord.services.impl.studentvalidationstructure.ValidateStudentTestStructure;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StudentValidatorTest {
-  IStudentValidator studentValidator = new StudentValidator();
+/**
+ * The type Student validator test.
+ */
+class StudentValidatorImpTest {
+  /**
+   * The Student validator.
+   */
+  StudentValidator studentValidator = new StudentValidatorImp();
 
   private static Stream<ValidateStudentTestStructure> generateTestToValidateStudent() {
     Student student1 = new Student("Student1", -15,
@@ -45,6 +46,11 @@ class StudentValidatorTest {
     return Stream.of(testcase1, testcase2, testcase3);
   }
 
+  /**
+   * Test validate student.
+   *
+   * @param testcase the testcase
+   */
   @ParameterizedTest
   @MethodSource("generateTestToValidateStudent")
   void testValidateStudent(ValidateStudentTestStructure testcase) {
@@ -75,6 +81,11 @@ class StudentValidatorTest {
     return Stream.of(testcase1, testcase2, testcase3);
   }
 
+  /**
+   * Test validate courses.
+   *
+   * @param testcase the testcase
+   */
   @ParameterizedTest
   @MethodSource("generateTestToValidateCourses")
   void testValidateCourses(ValidateCourseTestStructure testcase) {
@@ -100,6 +111,11 @@ class StudentValidatorTest {
     return Stream.of(testcase1, testcase2);
   }
 
+  /**
+   * Validate age.
+   *
+   * @param testcase the testcase
+   */
   @ParameterizedTest
   @MethodSource("generateTestToValidateAge")
   void validateAge(ValidateAgeTestStructure testcase) {

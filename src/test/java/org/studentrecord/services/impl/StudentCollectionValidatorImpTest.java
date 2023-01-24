@@ -4,23 +4,31 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.studentrecord.models.Student;
 import org.studentrecord.models.StudentCollection;
-import org.studentrecord.services.IStudentCollectionValidator;
+import org.studentrecord.services.StudentCollectionValidator;
 import org.studentrecord.services.impl.collectionvalidationstructure.ValidateRollNoTestStructure;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StudentCollectionValidatorTest {
+/**
+ * The type Student collection validator test.
+ */
+class StudentCollectionValidatorImpTest {
 
-  IStudentCollectionValidator studentCollectionValidator;
+  /**
+   * The Student collection validator.
+   */
+  StudentCollectionValidator studentCollectionValidator;
 
+  /**
+   * Init.
+   */
   @BeforeEach
   void init() {
-    studentCollectionValidator = new StudentCollectionValidator();
+    studentCollectionValidator = new StudentCollectionValidatorImp();
   }
 
   private static Stream<ValidateRollNoTestStructure> generateTestToValidateRollNo() {
@@ -41,6 +49,11 @@ class StudentCollectionValidatorTest {
     return Stream.of(testcase1, testcase2);
   }
 
+  /**
+   * Validate roll no.
+   *
+   * @param testcase the testcase
+   */
   @ParameterizedTest
   @MethodSource("generateTestToValidateRollNo")
   void validateRollNo(ValidateRollNoTestStructure testcase) {
@@ -49,13 +62,16 @@ class StudentCollectionValidatorTest {
       studentCollection.addStudent(s);
     }
     try {
-      studentCollectionValidator.validateRollNo(testcase.getRollNo());
+      studentCollectionValidator.validateRollNoAbsent(testcase.getRollNo());
       assertEquals(testcase.getErrorMessage(), "", testcase.getTestName());
     } catch (Exception e) {
       assertEquals(testcase.getErrorMessage(), e.getMessage(), testcase.getTestName());
     }
   }
 
+  /**
+   * Clear.
+   */
   @AfterEach
   void clear() {
     //clear the singleton pattern list
