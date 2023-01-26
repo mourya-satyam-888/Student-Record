@@ -1,5 +1,6 @@
 package org.studentrecord.services;
 
+import org.studentrecord.enums.Orders;
 import org.studentrecord.exceptions.ValidationException;
 
 /**
@@ -14,4 +15,20 @@ public interface StudentCollectionValidator {
    * @throws ValidationException the validation exception
    */
   Boolean validateRollNoAbsent(String rollNo);
+
+  /**
+   * Validate roll no present boolean.
+   *
+   * @param rollNo the roll no
+   * @return the boolean
+   */
+  Boolean validateRollNoPresent(String rollNo);
+
+  /**
+   * Validate sorting order orders.
+   *
+   * @param order the order
+   * @return the orders
+   */
+  Orders validateSortingOrder(String order);
 }

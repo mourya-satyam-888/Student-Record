@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
+import org.studentrecord.enums.Courses;
 
 /**
  * The type Student.
@@ -34,7 +35,7 @@ public class Student implements Serializable, Comparable<Student> {
   /**
    * List of Courses.
    */
-  private List<String> courses;
+  private List<Courses> courses;
 
   /**
    * Instantiates a new Student.
@@ -53,7 +54,7 @@ public class Student implements Serializable, Comparable<Student> {
    * @param courses the courses
    */
   public Student(final String name, final int age,
-                 final String address, final String rollNo, final List<String> courses) {
+                 final String address, final String rollNo, final List<Courses> courses) {
     this.name = name;
     this.age = age;
     this.address = address;
@@ -111,7 +112,7 @@ public class Student implements Serializable, Comparable<Student> {
    *
    * @return the courses
    */
-  public List<String> getCourses() {
+  public List<Courses> getCourses() {
     return courses;
   }
 
@@ -120,7 +121,7 @@ public class Student implements Serializable, Comparable<Student> {
    *
    * @param courses the courses
    */
-  public void setCourses(final List<String> courses) {
+  public void setCourses(final List<Courses> courses) {
     this.courses = courses;
   }
 

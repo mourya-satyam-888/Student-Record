@@ -16,18 +16,12 @@ import org.studentrecord.services.StudentValidator;
 /**
  * The type Student validator.
  */
-public class StudentValidatorImp implements StudentValidator {
-  /**
-   * Factory to create validator.
-   */
-  private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-  /**
-   * validator to check violations.
-   */
-  private final Validator validator = factory.getValidator();
+public class StudentValidatorImpl implements StudentValidator {
 
   @Override
   public Boolean validateStudent(final Student student) {
+    final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    final Validator validator = factory.getValidator();
     final Set<ConstraintViolation<Student>> violations = validator.validate(student);
     for (final ConstraintViolation<Student> violation : violations) {
       throw new ValidationException(violation.getMessage());
@@ -37,17 +31,12 @@ public class StudentValidatorImp implements StudentValidator {
 
   @Override
   public Boolean validateCourses(final List<String> courseList) {
-    if (courseList.size() != ValidationConstants.MIN_COURSES) {
-      throw new ValidationException("atleast four courses required");
-    }
     final HashSet<String> courseSet = new HashSet<>(courseList);
-    if (courseSet.size() < ValidationConstants.MIN_COURSES) {
+    if (courseSet.size() != ValidationConstants.MIN_COURSES) {
       throw new ValidationException("atleast four courses required");
     }
     try {
-      for (final String s : courseSet) {
-        Courses.valueOf(s);
-      }
+      courseList.forEach(Courses::valueOf);
     } catch (Exception e) {
       throw new ValidationException("Course must be From A,B,C,D,E or F");
     }

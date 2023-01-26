@@ -4,5 +4,12 @@ package org.studentrecord.enums;
  * ExceptionCode for Exception.
  */
 public enum ExceptionCode {
-  VALIDATION_ERROR
+  /**
+   * Validation error exception code.
+   */
+  VALIDATION_ERROR,
+  /**
+   * File error exception code.
+   */
+  FILE_ERROR
 }

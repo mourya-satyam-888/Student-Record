@@ -12,6 +12,10 @@ public class BaseTest {
    * The Error message.
    */
   public String errorMessage;
+  /**
+   * The Error expected.
+   */
+  public Boolean errorExpected;
 
   /**
    * Gets test name.
@@ -47,5 +51,23 @@ public class BaseTest {
    */
   public void setErrorMessage(String errorMessage) {
     this.errorMessage = errorMessage;
+  }
+
+  /**
+   * Gets error expected.
+   *
+   * @return the error expected
+   */
+  public Boolean getErrorExpected() {
+    return errorExpected;
+  }
+
+  /**
+   * Sets error expected.
+   *
+   * @param errorExpected the error expected
+   */
+  public void setErrorExpected(Boolean errorExpected) {
+    this.errorExpected = errorExpected;
   }
 }

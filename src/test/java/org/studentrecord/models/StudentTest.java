@@ -5,6 +5,7 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.studentrecord.enums.Courses;
 import org.studentrecord.models.studentteststructure.StudentCompareToTestStructure;
 import org.studentrecord.models.studentteststructure.StudentEqualsTestStructure;
 
@@ -16,11 +17,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class StudentTest {
   private static Stream<StudentEqualsTestStructure> generateStudentEqualsTest() {
     Student student1 = new Student("student1", 10,
-        "address1", "rollNo1", Arrays.asList("A", "B", "C", "D"));
+        "address1", "rollNo1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     Student student2 = new Student("student2", 10,
-        "address2", "rollNo2", Arrays.asList("A", "B", "C", "D"));
+        "address2", "rollNo2",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     Student student3 = new Student("student1", 10,
-        "address1", "rollNo1", Arrays.asList("A", "B", "C", "D"));
+        "address1", "rollNo1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     //two not equal students
     StudentEqualsTestStructure testcase1 = new StudentEqualsTestStructure();
     testcase1.setFirstStudent(student1);
@@ -51,11 +55,14 @@ class StudentTest {
 
   private static Stream<StudentCompareToTestStructure> generateStudentCompareToTest() {
     Student student1 = new Student("student1", 10,
-        "address1", "rollNo1", Arrays.asList("A", "B", "C", "D"));
+        "address1", "rollNo1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     Student student2 = new Student("student2", 10,
-        "address1", "rollNo2", Arrays.asList("A", "B", "C", "D"));
+        "address1", "rollNo2",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     Student student3 = new Student("student1", 10,
-        "address1", "rollNo2", Arrays.asList("A", "B", "C", "D"));
+        "address1", "rollNo2",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     //name different first less than second
     StudentCompareToTestStructure testcase1 = new StudentCompareToTestStructure();
     testcase1.setFirstStudent(student1);

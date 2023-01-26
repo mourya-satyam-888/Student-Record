@@ -7,5 +7,5 @@ public class ValidationConstants {
   /**
    * The constant MIN_COURSES.
    */
-  public static int MIN_COURSES = 4;
+  public static final int MIN_COURSES = 4;
 }

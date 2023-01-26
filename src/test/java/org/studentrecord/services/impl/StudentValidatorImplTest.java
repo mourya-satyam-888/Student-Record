@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.studentrecord.enums.Courses;
 import org.studentrecord.models.Student;
 import org.studentrecord.services.StudentValidator;
 import org.studentrecord.services.impl.studentvalidationstructure.ValidateAgeTestStructure;
@@ -15,15 +16,16 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * The type Student validator test.
  */
-class StudentValidatorImpTest {
+class StudentValidatorImplTest {
   /**
    * The Student validator.
    */
-  StudentValidator studentValidator = new StudentValidatorImp();
+  StudentValidator studentValidator = new StudentValidatorImpl();
 
   private static Stream<ValidateStudentTestStructure> generateTestToValidateStudent() {
     Student student1 = new Student("Student1", -15,
-        "Address 1", "1", Arrays.asList("A", "B", "C", "D"));
+        "Address 1", "1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     //negative Age
     ValidateStudentTestStructure testcase1 = new ValidateStudentTestStructure();
     testcase1.setStudent(student1);
@@ -31,14 +33,16 @@ class StudentValidatorImpTest {
     testcase1.setErrorMessage("Invalid Age");
     //EmptyName
     Student student2 = new Student("", 10,
-        "Address 2", "2", Arrays.asList("A", "B", "C", "D"));
+        "Address 2", "2",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     ValidateStudentTestStructure testcase2 = new ValidateStudentTestStructure();
     testcase2.setStudent(student2);
     testcase2.setTestName("Empty Name");
     testcase2.setErrorMessage("Empty Name");
     //valid case
     Student student3 = new Student("Student3", 15,
-        "Address 1", "1", Arrays.asList("A", "B", "C", "D"));
+        "Address 1", "1",
+        Arrays.asList(Courses.A, Courses.B, Courses.C, Courses.D));
     ValidateStudentTestStructure testcase3 = new ValidateStudentTestStructure();
     testcase3.setStudent(student3);
     testcase3.setTestName("Valid Case");
