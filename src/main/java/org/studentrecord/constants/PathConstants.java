@@ -7,5 +7,5 @@ public class PathConstants {
   /**
    * The constant FILE_PATH.
    */
-  public static final String FILE_PATH = "studentRecord.ser";
+  public static final String FILE_PATH = "output/studentRecord.ser";
 }
