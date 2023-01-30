@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import org.studentrecord.constants.MenuConstants;
-import org.studentrecord.controllers.DataBaseController;
+import org.studentrecord.constants.ValidationConstants;
+import org.studentrecord.controllers.FileController;
 import org.studentrecord.controllers.StudentCollectionController;
 import org.studentrecord.models.Student;
 
@@ -17,45 +18,50 @@ public class Application {
    */
   private static Scanner scanner = new Scanner(System.in);
   /**
-   * The constant terminated.
+   * The Student collection controller.
    */
-  private static Boolean terminated = false;
+  private final StudentCollectionController studentCollectionController
+      = new StudentCollectionController();
+  /**
+   * The File controller.
+   */
+  private final FileController fileController = new FileController();
 
   /**
    * Show termination menu.
    */
-  private static void showTerminationMenu() {
+  private void showTerminationMenu() {
     System.out.println("Do you wish to save the record in file(y/n)?");
     final String option = scanner.nextLine().strip();
     if (MenuConstants.YES.equals(option)) {
       saveStudent();
     }
     System.out.println("Terminated successfully");
-    terminated = true;
+    System.exit(0);
   }
 
 
   /**
    * Save student.
    */
-  private static void saveStudent() {
-    DataBaseController.writeData();
+  private void saveStudent() {
+    fileController.writeData();
   }
 
   /**
    * Delete student.
    */
-  private static void deleteStudent() {
+  private void deleteStudent() {
     System.out.println("Enter the roll no of the student to be deleted");
     final String rollNo = scanner.nextLine().strip();
-    StudentCollectionController.deleteStudent(rollNo);
+    studentCollectionController.deleteStudent(rollNo);
     System.out.println("The Student deleted successfully");
   }
 
   /**
    * Display student menu.
    */
-  private static void displayStudentMenu() {
+  private void displayStudentMenu() {
     System.out.println(
         "Select order in which data needs to be sorted\n"
             + "1. According to name in ascending order\n"
@@ -67,14 +73,14 @@ public class Application {
             + "7. According to address in ascending order\n"
             + "8. According to address in descending order\n");
     final String order = scanner.nextLine().strip();
-    final List<Student> students = StudentCollectionController.sortStudentByOrder(order);
+    final List<Student> students = studentCollectionController.sortStudentByOrder(order);
     System.out.println(students);
   }
 
   /**
    * Add student.
    */
-  private static void addStudent() {
+  private void addStudent() {
     System.out.println(
         "Give the input in following order line by line\n"
             + "1. Full name\n"
@@ -87,11 +93,11 @@ public class Application {
     final String studentRollNo = scanner.nextLine().strip();
     final String studentAddress = scanner.nextLine().strip();
     final List<String> courses = new ArrayList<>();
-    for (int i = 1; i <= 4; i++) {
+    for (int i = 1; i <= ValidationConstants.MIN_COURSES; i++) {
       final String courseName = scanner.nextLine().strip();
       courses.add(courseName);
     }
-    StudentCollectionController.addStudent(studentName, studentAge,
+    studentCollectionController.addStudent(studentName, studentAge,
         studentAddress, studentRollNo, courses);
     System.out.println("The student Added");
   }
@@ -99,7 +105,7 @@ public class Application {
   /**
    * Select option.
    */
-  private static void selectOption() {
+  private void selectOption() {
     try {
       final String option = scanner.nextLine().strip();
       switch (option) {
@@ -131,7 +137,7 @@ public class Application {
   /**
    * Show menu.
    */
-  private static void showMenu() {
+  private void showMenu() {
     System.out.println(
         "Select one of the 5 options available by entering number\n"
             + "1. Add Student Details\n"
@@ -146,7 +152,7 @@ public class Application {
    *
    * @param errorMessage the error message
    */
-  private static void showErrors(final String errorMessage) {
+  private void showErrors(final String errorMessage) {
     //will be used to show validation errors
     System.out.println("The following error occurred");
     System.out.println(errorMessage);
@@ -155,21 +161,21 @@ public class Application {
   /**
    * Load data.
    */
-  private static void loadData() {
+  private void loadData() {
     try {
-      DataBaseController.readData();
+      fileController.readData();
     } catch (Exception e) {
-      terminated = true;
       showErrors(e.getMessage());
+      System.exit(0);
     }
   }
 
   /**
    * Run.
    */
-  public static void run() {
+  public void run() {
     loadData();
-    while (!terminated) {
+    while (true) {
       showMenu();
     }
   }

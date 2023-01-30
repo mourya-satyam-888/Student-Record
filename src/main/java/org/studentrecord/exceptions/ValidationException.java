@@ -1,6 +1,5 @@
 package org.studentrecord.exceptions;
 
-
 import org.studentrecord.enums.ExceptionCode;
 
 /**

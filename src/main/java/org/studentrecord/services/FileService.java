@@ -3,7 +3,7 @@ package org.studentrecord.services;
 /**
  * The interface Data base service.
  */
-public interface DataBaseService {
+public interface FileService {
   /**
    * Read file.
    */

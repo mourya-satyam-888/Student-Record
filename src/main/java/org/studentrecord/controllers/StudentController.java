@@ -21,9 +21,9 @@ public class StudentController {
    * @param courses        the courses
    * @return the student
    */
-  public static Student createStudent(final String studentName, final String age,
-                                      final String studentAddress, final String studentRollNo,
-                                      final List<String> courses) {
+  public Student createStudent(final String studentName, final String age,
+                               final String studentAddress, final String studentRollNo,
+                               final List<String> courses) {
     final StudentValidator studentValidator = new StudentValidatorImpl();
     studentValidator.validateAge(age);
     final int studentAge = Integer.parseInt(age);

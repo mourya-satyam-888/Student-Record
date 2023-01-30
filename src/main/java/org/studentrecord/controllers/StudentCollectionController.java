@@ -23,6 +23,16 @@ public class StudentCollectionController {
 
 
   /**
+   * The Student collection validator.
+   */
+  protected StudentCollectionValidator studentCollectionValidator
+      = new StudentCollectionValidatorImpl();
+  /**
+   * The Student controller.
+   */
+  protected StudentController studentController = new StudentController();
+
+  /**
    * Add student.
    *
    * @param studentName    the student name
@@ -31,13 +41,11 @@ public class StudentCollectionController {
    * @param studentRollNo  the student roll no
    * @param courses        the courses
    */
-  public static void addStudent(final String studentName, final String studentAge,
-                                final String studentAddress, final String studentRollNo,
-                                final List<String> courses) {
-    final StudentCollectionValidator
-        studentCollectionValidator = new StudentCollectionValidatorImpl();
+  public void addStudent(final String studentName, final String studentAge,
+                         final String studentAddress, final String studentRollNo,
+                         final List<String> courses) {
     studentCollectionValidator.validateRollNoAbsent(studentRollNo);
-    final Student student = StudentController.createStudent(studentName, studentAge,
+    final Student student = studentController.createStudent(studentName, studentAge,
         studentAddress, studentRollNo, courses);
     StudentCollection.getInstance().addStudent(student);
   }
@@ -47,9 +55,7 @@ public class StudentCollectionController {
    *
    * @param studentRollNo the student roll no
    */
-  public static void deleteStudent(final String studentRollNo) {
-    final StudentCollectionValidator
-        studentCollectionValidator = new StudentCollectionValidatorImpl();
+  public void deleteStudent(final String studentRollNo) {
     studentCollectionValidator.validateRollNoPresent(studentRollNo);
     StudentCollection.getInstance().deleteStudent(studentRollNo);
   }

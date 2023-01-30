@@ -35,7 +35,8 @@ class StudentControllerTest {
   @MethodSource("generateTest")
   void createStudentTest(StudentControllerTestStructure testcase) {
     try {
-      StudentController.createStudent(
+      StudentController studentController = new StudentController();
+      studentController.createStudent(
           testcase.getName(), testcase.getAge(),
           testcase.getAddress(), testcase.getRollNo(),
           testcase.getCourses());
